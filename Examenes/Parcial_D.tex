@@ -1,0 +1,321 @@
+\documentclass[addpoints,11pt]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{array} 
+\usepackage{vhistory}
+\usepackage{verbatim}
+\usepackage{multicol,caption,capt-of}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray}
+}
+
+\newcommand{\examversion}{D}
+\newcommand{\examduration}{100 minutos}
+\newcommand{\exampoints}{50}
+\newcommand{\examdate}{Diciembre 2024}
+
+\begin{document}
+	
+	\pagestyle{headandfoot}
+	\runningheadrule
+	\firstpageheader{Programación}{Examen Parcial - Versión \examversion}{\examdate}
+	\runningheader{Programación}
+	{Examen Parcial - Versión \examversion, Página \thepage\ de \numpages}
+	{\examdate}
+	\runningfooter{Escuela de Ingenierías}{UPB}{Ingeniería Aeronáutica}
+	
+	\begin{center}
+    \begin{tabular}{@{}m{4cm}|m{8cm}|m{5cm}|@{}}
+        \cline{2-3}
+		\multirow{5}{*}{\includegraphics[width=1\linewidth]{LogoUPB.jpg}}
+        &\multicolumn{2}{c|}{\textbf{Universidad Pontificia Bolivariana - Sede Medellín}} \\ \cline{2-3}
+        &Curso: \textbf{Programación} &Duración: \examduration \\ \cline{2-3}
+        &Preparada por:\textbf{ Henry Andrade, IEo, Ph.D.} &Puntos totales: \exampoints \\ \cline{2-3}
+        &\multicolumn{2}{l|}{Facultad de Ingeniería Aeronáutica} \\ \cline{2-3}
+        &\multicolumn{2}{l|}{Estudiante: } \\ \cline{2-3}
+    \end{tabular}
+	\end{center}
+
+	\begin{center}
+	\fbox{\fbox{\parbox{7in}{Lea cuidadosamente cada una de las preguntas antes de contestar. No se permite el uso de ningún tipo de dispositivo electrónico diferente al computador asignado. No se puede utilizar el navegador para acceder a ninguna página que no sea autorizada por el docente. Cualquier intento de copia o fraude dará inicio a un proceso disciplinario. Este examen evalúa sus competencias en manejo de archivos de texto y CSV en Python.}}}
+	\end{center}
+
+	\vspace{0.5cm}
+	
+	\begin{questions} 
+	\boxedpoints
+	\pointname{ Puntos}
+	\qformat{Pregunta \thequestion \dotfill \thepoints}
+	
+	% ============================================
+	% SECCIÓN 1: PREGUNTAS DE SELECCIÓN MÚLTIPLE (18 puntos)
+	% ============================================
+	
+	\question[3]
+	¿Cuál es la diferencia principal entre los modos de apertura \texttt{'w'} y \texttt{'a'} en Python?
+	
+	\begin{choices}
+		\CorrectChoice \texttt{'w'} sobrescribe el archivo, \texttt{'a'} agrega al final % CORRECTA
+		\choice \texttt{'w'} es para lectura, \texttt{'a'} es para escritura
+		\choice \texttt{'w'} crea el archivo si no existe, \texttt{'a'} no lo crea
+		\choice No hay diferencia, son equivalentes
+	\end{choices}
+	
+	% Justificación: 'w' (write) sobrescribe, 'a' (append) agrega al final
+	
+	\question[3]
+	¿Cuál afirmación es correcta sobre el método \texttt{writelines()} de Python?
+	
+	\begin{choices}
+		\choice Añade automáticamente saltos de línea entre elementos
+		\CorrectChoice No añade saltos de línea automáticamente % CORRECTA
+		\choice Solo funciona con archivos CSV
+		\choice Requiere que todos los elementos sean números
+	\end{choices}
+	
+	% Justificación: writelines() concatena los elementos sin añadir \n
+	
+	\question[3]
+	Al procesar un archivo CSV que usa punto y coma (;) como delimitador, ¿cuál código es correcto?
+	
+	\begin{choices}
+		\choice \texttt{reader = csv.reader(file)}
+		\CorrectChoice \texttt{reader = csv.reader(file, delimiter=';')} % CORRECTA
+		\choice \texttt{reader = csv.reader(file, sep=';')}
+		\choice \texttt{reader = csv.reader\_delim(file, ';')}
+	\end{choices}
+	
+	% Justificación: delimiter es el parámetro correcto para especificar el separador
+	
+	\question[3]
+	¿Qué sucede si NO se cierra un archivo después de escribir en él?
+	
+	\begin{choices}
+		\choice Nada, Python lo cierra automáticamente
+		\choice El archivo se elimina del disco
+		\CorrectChoice Puede haber pérdida de datos o recursos no liberados % CORRECTA
+		\choice El programa genera un error inmediatamente
+	\end{choices}
+	
+	% Justificación: No cerrar archivos puede causar pérdida de datos en buffer y fugas de recursos
+	
+	\question[3]
+	Al usar \texttt{csv.DictWriter}, ¿qué parámetro es obligatorio especificar al crear el objeto?
+	
+	\begin{choices}
+		\choice \texttt{delimiter}
+		\CorrectChoice \texttt{fieldnames} % CORRECTA
+		\choice \texttt{quoting}
+		\choice \texttt{encoding}
+	\end{choices}
+	
+	% Justificación: fieldnames es obligatorio para DictWriter, define las columnas del CSV
+	
+	\question[3]
+	Observe el siguiente código:
+	
+	\begin{lstlisting}
+with open("test.txt", "r") as f:
+    line = f.readline()
+    print(line, end='')
+	\end{lstlisting}
+	
+	Si la primera línea del archivo es ``Hola Mundo\textbackslash n'', ¿qué se imprime?
+	
+	\begin{choices}
+		\choice Hola Mundo (sin salto de línea al final)
+		\CorrectChoice Hola Mundo\textbackslash n (con el salto de línea) % CORRECTA
+		\choice Solo ``Hola''
+		\choice Error de sintaxis
+	\end{choices}
+	
+	% Justificación: readline() incluye el \n en la cadena retornada
+	
+	% ============================================
+	% SECCIÓN 2: EJERCICIO PRÁCTICO 1 (10 puntos)
+	% ============================================
+	
+	\question[10]
+	Escriba un programa en Python que procese un archivo de texto llamado \texttt{palabras.txt} que contiene varias palabras separadas por espacios. El programa debe:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Leer el archivo \texttt{palabras.txt}
+		\item Contar cuántas palabras tiene el archivo
+		\item Ordenar las palabras alfabéticamente
+		\item Eliminar palabras duplicadas
+		\item Crear un archivo \texttt{palabras\_ordenadas.txt} con las palabras únicas ordenadas, una por línea
+	\end{enumerate}
+	
+	\textbf{Ejemplo:} Si \texttt{palabras.txt} contiene:
+	\begin{verbatim}
+	python java python c++ java javascript
+	\end{verbatim}
+	
+	El archivo \texttt{palabras\_ordenadas.txt} debe contener:
+	\begin{verbatim}
+	c++
+	java
+	javascript
+	python
+	\end{verbatim}
+	
+	Y debe imprimir: ``Total de palabras únicas: 4''
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use la sentencia \texttt{with} para manejar archivos
+		\item Use estructuras de datos apropiadas (sets, listas)
+		\item Incluya manejo de excepciones
+		\item Considere palabras en minúsculas para comparación
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Lectura correcta del archivo (2 puntos)
+		\item Conteo de palabras (1 punto)
+		\item Ordenamiento alfabético (2 puntos)
+		\item Eliminación de duplicados (2 puntos)
+		\item Escritura correcta del archivo (2 puntos)
+		\item Manejo de errores (1 punto)
+	\end{itemize}
+	
+	% ============================================
+	% SECCIÓN 3: EJERCICIO PRÁCTICO 2 (12 puntos)
+	% ============================================
+	
+	\question[12]
+	Se tiene un archivo CSV llamado \texttt{empleados.csv} con la siguiente estructura:
+	
+	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
+	Nombre,Departamento,Salario,HorasExtra\\
+	Juan,Ventas,3000000,10\\
+	María,TI,4000000,5\\
+	Pedro,Ventas,2800000,15\\
+	Ana,TI,3500000,8
+	\end{tcolorbox}
+	
+	Cada hora extra se paga a \$50,000. Escriba un programa que:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Lea el archivo CSV
+		\item Calcule el salario total de cada empleado (Salario + HorasExtra × 50,000)
+		\item Calcule el total de nómina por departamento
+		\item Identifique el empleado con mayor salario total
+		\item Cree un archivo \texttt{nomina.csv} con el formato:
+	\end{enumerate}
+	
+	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
+	Nombre,Departamento,SalarioBase,HorasExtra,SalarioTotal\\
+	Juan,Ventas,3000000,10,3500000\\
+	María,TI,4000000,5,4250000\\
+	Pedro,Ventas,2800000,15,3550000\\
+	Ana,TI,3500000,8,3900000
+	\end{tcolorbox}
+	
+	Además, imprima en consola:
+	\begin{itemize}
+		\item ``Nómina total de Ventas: \$[valor]''
+		\item ``Nómina total de TI: \$[valor]''
+		\item ``Empleado con mayor salario: [Nombre] con \$[valor]''
+	\end{itemize}
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use el módulo \texttt{csv} de Python
+		\item Use \texttt{csv.reader} para leer
+		\item Maneje correctamente la conversión de tipos
+		\item Use \texttt{newline=''} al abrir archivos CSV
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Lectura correcta del CSV (2 puntos)
+		\item Cálculo correcto del salario total por empleado (3 puntos)
+		\item Cálculo de nómina por departamento (2 puntos)
+		\item Identificación del empleado con mayor salario (2 puntos)
+		\item Escritura correcta del archivo de nómina (2 puntos)
+		\item Manejo de tipos y buenas prácticas (1 punto)
+	\end{itemize}
+	
+	% ============================================
+	% SECCIÓN 4: EJERCICIO PRÁCTICO 3 (10 puntos)
+	% ============================================
+	
+	\question[10]
+	Desarrolle un programa de registro de gastos personales. El programa debe:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Presentar un menú con las siguientes opciones:
+		\begin{itemize}
+			\item 1. Registrar gasto
+			\item 2. Ver todos los gastos
+			\item 3. Calcular total de gastos por categoría
+			\item 4. Calcular gasto total
+			\item 5. Salir
+		\end{itemize}
+		\item Los gastos deben almacenarse en un archivo \texttt{gastos.txt} con el formato:
+		\texttt{Categoría;Descripción;Monto}
+		\item Las categorías válidas son: Alimentación, Transporte, Entretenimiento, Otros
+		\item Al registrar un gasto, validar que la categoría sea válida y el monto sea un número positivo
+	\end{enumerate}
+	
+	\textbf{Ejemplo del contenido de gastos.txt:}
+	\begin{verbatim}
+	Alimentación;Almuerzo;25000
+	Transporte;Uber;15000
+	Alimentación;Cena;30000
+	\end{verbatim}
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use funciones para cada opción del menú
+		\item Al iniciar, cargar gastos existentes del archivo
+		\item Al salir, guardar todos los gastos
+		\item Para la opción 3, mostrar el total por cada categoría que tenga gastos
+		\item Incluya validación de datos y manejo de excepciones
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Menú funcional y repetitivo (2 puntos)
+		\item Registrar gastos con validación (2 puntos)
+		\item Ver todos los gastos (1 punto)
+		\item Calcular totales por categoría (2 puntos)
+		\item Calcular gasto total (1 punto)
+		\item Persistencia correcta en archivo (2 puntos)
+	\end{itemize}
+	
+	\end{questions}
+
+	\begin{center}
+		\gradetable[h][questions]
+	\end{center}
+	
+	% NOTAS PARA EL PROFESOR
+	% Total: 50 puntos
+	% MCQ: 6 preguntas × 3 puntos = 18 puntos
+	% Ejercicio 1: 10 puntos
+	% Ejercicio 2: 12 puntos
+	% Ejercicio 3: 10 puntos
+	% Tiempo estimado: 100 minutos
+	
+\end{document}

@@ -1,0 +1,84 @@
+\documentclass[addpoints,11pt]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{array} 
+\usepackage{vhistory}
+\usepackage{verbatim}
+\usepackage{multicol,caption,capt-of}
+\usepackage{enumitem}
+\usepackage{microtype} % Improved typography
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{listings} % For code formatting
+\usepackage{xcolor}
+
+% Code listing style
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray}
+}
+
+% Variables for exam metadata
+\newcommand{\examversion}{A} % A, B, C, or D
+\newcommand{\examduration}{100 minutos}
+\newcommand{\exampoints}{50}
+\newcommand{\examdate}{Diciembre 2024}
+
+\begin{document}
+	
+	% Headers and footers
+	\pagestyle{headandfoot}
+	\runningheadrule
+	\firstpageheader{Programación}{Examen Parcial - Versión \examversion}{\examdate}
+	\runningheader{Programación}
+	{Examen Parcial - Versión \examversion, Página \thepage\ de \numpages}
+	{\examdate}
+	\runningfooter{Escuela de Ingenierías}{UPB}{Ingeniería Aeronáutica}
+	
+	% Title section with logo
+	\begin{center}
+    \begin{tabular}{@{}m{4cm}|m{8cm}|m{5cm}|@{}}
+        \cline{2-3}
+		\multirow{5}{*}{\includegraphics[width=1\linewidth]{LogoUPB.jpg}}
+        &\multicolumn{2}{c|}{\textbf{Universidad Pontificia Bolivariana - Sede Medellín}} \\ \cline{2-3}
+        &Curso: \textbf{Programación} &Duración: \examduration \\ \cline{2-3}
+        &Preparada por:\textbf{ Henry Andrade, IEo, Ph.D.} &Puntos totales: \exampoints \\ \cline{2-3}
+        &\multicolumn{2}{l|}{Facultad de Ingeniería Aeronáutica} \\ \cline{2-3}
+        &\multicolumn{2}{l|}{Estudiante: } \\ \cline{2-3}
+    \end{tabular}
+	\end{center}
+
+	% Instructions box
+	\begin{center}
+	\fbox{\fbox{\parbox{7in}{Lea cuidadosamente cada una de las preguntas antes de contestar. No se permite el uso de ningún tipo de dispositivo electrónico diferente al computador asignado. No se puede utilizar el navegador para acceder a ninguna página que no sea autorizada por el docente. Cualquier intento de copia o fraude dará inicio a un proceso disciplinario. Este examen evalúa sus competencias en manejo de archivos de texto y CSV en Python.}}}
+	\end{center}
+
+	\vspace{0.5cm}
+	
+	% Questions section	
+	\begin{questions} 
+	\boxedpoints
+	\pointname{ Puntos}
+	\qformat{Pregunta \thequestion \dotfill \thepoints}
+	
+	% CONTENT GOES HERE
+	
+	\end{questions}
+
+	% Grade table
+	\begin{center}
+		\gradetable[h][questions]
+	\end{center}
+	
+\end{document}

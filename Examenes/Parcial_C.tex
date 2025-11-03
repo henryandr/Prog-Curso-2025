@@ -1,0 +1,309 @@
+\documentclass[addpoints,11pt]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{array} 
+\usepackage{vhistory}
+\usepackage{verbatim}
+\usepackage{multicol,caption,capt-of}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray}
+}
+
+\newcommand{\examversion}{C}
+\newcommand{\examduration}{100 minutos}
+\newcommand{\exampoints}{50}
+\newcommand{\examdate}{Diciembre 2024}
+
+\begin{document}
+	
+	\pagestyle{headandfoot}
+	\runningheadrule
+	\firstpageheader{Programación}{Examen Parcial - Versión \examversion}{\examdate}
+	\runningheader{Programación}
+	{Examen Parcial - Versión \examversion, Página \thepage\ de \numpages}
+	{\examdate}
+	\runningfooter{Escuela de Ingenierías}{UPB}{Ingeniería Aeronáutica}
+	
+	\begin{center}
+    \begin{tabular}{@{}m{4cm}|m{8cm}|m{5cm}|@{}}
+        \cline{2-3}
+		\multirow{5}{*}{\includegraphics[width=1\linewidth]{LogoUPB.jpg}}
+        &\multicolumn{2}{c|}{\textbf{Universidad Pontificia Bolivariana - Sede Medellín}} \\ \cline{2-3}
+        &Curso: \textbf{Programación} &Duración: \examduration \\ \cline{2-3}
+        &Preparada por:\textbf{ Henry Andrade, IEo, Ph.D.} &Puntos totales: \exampoints \\ \cline{2-3}
+        &\multicolumn{2}{l|}{Facultad de Ingeniería Aeronáutica} \\ \cline{2-3}
+        &\multicolumn{2}{l|}{Estudiante: } \\ \cline{2-3}
+    \end{tabular}
+	\end{center}
+
+	\begin{center}
+	\fbox{\fbox{\parbox{7in}{Lea cuidadosamente cada una de las preguntas antes de contestar. No se permite el uso de ningún tipo de dispositivo electrónico diferente al computador asignado. No se puede utilizar el navegador para acceder a ninguna página que no sea autorizada por el docente. Cualquier intento de copia o fraude dará inicio a un proceso disciplinario. Este examen evalúa sus competencias en manejo de archivos de texto y CSV en Python.}}}
+	\end{center}
+
+	\vspace{0.5cm}
+	
+	\begin{questions} 
+	\boxedpoints
+	\pointname{ Puntos}
+	\qformat{Pregunta \thequestion \dotfill \thepoints}
+	
+	% ============================================
+	% SECCIÓN 1: PREGUNTAS DE SELECCIÓN MÚLTIPLE (18 puntos)
+	% ============================================
+	
+	\question[3]
+	¿Cuál método se debe utilizar para leer una sola línea de un archivo de texto en Python?
+	
+	\begin{choices}
+		\choice \texttt{read()}
+		\CorrectChoice \texttt{readline()} % CORRECTA
+		\choice \texttt{readlines()}
+		\choice \texttt{readone()}
+	\end{choices}
+	
+	% Justificación: readline() lee una línea completa hasta el carácter \n
+	
+	\question[3]
+	Al trabajar con archivos CSV que contienen valores con comas dentro de los datos (por ejemplo, "Medellín, Colombia"), ¿qué hace automáticamente el módulo \texttt{csv} de Python?
+	
+	\begin{choices}
+		\choice Genera un error
+		\choice Elimina las comas de los valores
+		\CorrectChoice Rodea los valores con comillas para mantenerlos como un solo campo % CORRECTA
+		\choice Reemplaza las comas por puntos y comas
+	\end{choices}
+	
+	% Justificación: csv maneja automáticamente el quoting cuando hay delimitadores en los datos
+	
+	\question[3]
+	Observe el siguiente código:
+	
+	\begin{lstlisting}
+archivo = open("datos.txt", "w")
+archivo.write("Línea 1")
+archivo.write("Línea 2")
+archivo.close()
+	\end{lstlisting}
+	
+	¿Qué contendrá el archivo \texttt{datos.txt} después de ejecutar este código?
+	
+	\begin{choices}
+		\choice Línea 1\\Línea 2 (en dos líneas separadas)
+		\CorrectChoice Línea 1Línea 2 (en una sola línea) % CORRECTA
+		\choice Solo ``Línea 2''
+		\choice Genera un error
+	\end{choices}
+	
+	% Justificación: write() no añade saltos de línea automáticamente
+	
+	\question[3]
+	¿Cuál es la forma correcta de especificar un delimitador diferente (por ejemplo, punto y coma) al leer un archivo CSV?
+	
+	\begin{choices}
+		\choice \texttt{csv.reader(file, separator=';')}
+		\CorrectChoice \texttt{csv.reader(file, delimiter=';')} % CORRECTA
+		\choice \texttt{csv.reader(file, sep=';')}
+		\choice \texttt{csv.reader(file, split=';')}
+	\end{choices}
+	
+	% Justificación: El parámetro correcto es delimiter
+	
+	\question[3]
+	¿Qué función de Python se puede usar para verificar si un archivo existe antes de intentar abrirlo?
+	
+	\begin{choices}
+		\choice \texttt{file.exists()}
+		\choice \texttt{check\_file()}
+		\CorrectChoice \texttt{os.path.exists()} % CORRECTA
+		\choice \texttt{verify\_file()}
+	\end{choices}
+	
+	% Justificación: os.path.exists() del módulo os verifica la existencia de archivos
+	
+	\question[3]
+	Al usar \texttt{csv.writer}, ¿qué método se usa para escribir una sola fila en el archivo CSV?
+	
+	\begin{choices}
+		\choice \texttt{write()}
+		\CorrectChoice \texttt{writerow()} % CORRECTA
+		\choice \texttt{writeline()}
+		\choice \texttt{append()}
+	\end{choices}
+	
+	% Justificación: writerow() escribe una lista como una fila en el CSV
+	
+	% ============================================
+	% SECCIÓN 2: EJERCICIO PRÁCTICO 1 (10 puntos)
+	% ============================================
+	
+	\question[10]
+	Escriba un programa en Python que analice un archivo de texto llamado \texttt{documento.txt} y genere estadísticas sobre su contenido. El programa debe:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Leer el archivo \texttt{documento.txt}
+		\item Contar el número total de líneas
+		\item Contar el número total de caracteres (incluyendo espacios)
+		\item Contar el número de caracteres sin espacios
+		\item Encontrar la palabra más larga en el documento
+		\item Guardar los resultados en \texttt{analisis.txt} con el formato:
+	\end{enumerate}
+	
+	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
+	Total de líneas: [número]\\
+	Total de caracteres: [número]\\
+	Caracteres sin espacios: [número]\\
+	Palabra más larga: [palabra] ([longitud] caracteres)
+	\end{tcolorbox}
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use la sentencia \texttt{with} para manejar archivos
+		\item Considere que las palabras están separadas por espacios
+		\item Incluya manejo de excepciones
+		\item El código debe tener comentarios explicativos
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Lectura correcta del archivo (1 punto)
+		\item Conteo de líneas (2 puntos)
+		\item Conteo de caracteres con y sin espacios (2 puntos)
+		\item Identificación de la palabra más larga (3 puntos)
+		\item Escritura correcta del archivo de resultados (1 punto)
+		\item Manejo de errores (1 punto)
+	\end{itemize}
+	
+	% ============================================
+	% SECCIÓN 3: EJERCICIO PRÁCTICO 2 (12 puntos)
+	% ============================================
+	
+	\question[12]
+	Se tiene un archivo CSV llamado \texttt{ventas.csv} con la siguiente estructura:
+	
+	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
+	Mes,Producto,Cantidad,PrecioUnitario\\
+	Enero,Laptop,5,1200000\\
+	Enero,Mouse,20,25000\\
+	Febrero,Laptop,3,1200000\\
+	Febrero,Teclado,10,80000
+	\end{tcolorbox}
+	
+	Escriba un programa que:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Lea el archivo CSV
+		\item Calcule el total de ventas por mes (Cantidad × PrecioUnitario sumado por mes)
+		\item Calcule el total general de todas las ventas
+		\item Identifique el mes con mayores ventas
+		\item Cree un archivo \texttt{resumen\_ventas.csv} con el formato:
+	\end{enumerate}
+	
+	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
+	Mes,TotalVentas\\
+	Enero,6500000\\
+	Febrero,4400000
+	\end{tcolorbox}
+	
+	Además, imprima en consola:
+	\begin{itemize}
+		\item ``Total general de ventas: \$[valor]''
+		\item ``Mes con mayores ventas: [mes] con \$[valor]''
+	\end{itemize}
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use el módulo \texttt{csv} de Python
+		\item Use \texttt{csv.reader} para leer y \texttt{csv.writer} para escribir
+		\item Maneje correctamente la conversión de tipos de datos
+		\item Use \texttt{newline=''} al abrir archivos CSV
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Lectura correcta del CSV con encabezados (3 puntos)
+		\item Cálculo de ventas por mes (3 puntos)
+		\item Cálculo de total general y mes con mayores ventas (2 puntos)
+		\item Escritura correcta del archivo resumen (3 puntos)
+		\item Manejo de tipos y buenas prácticas (1 punto)
+	\end{itemize}
+	
+	% ============================================
+	% SECCIÓN 4: EJERCICIO PRÁCTICO 3 (10 puntos)
+	% ============================================
+	
+	\question[10]
+	Desarrolle un programa de gestión de tareas (To-Do List) que permita al usuario administrar sus pendientes. El programa debe:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Presentar un menú con las siguientes opciones:
+		\begin{itemize}
+			\item 1. Agregar tarea
+			\item 2. Marcar tarea como completada
+			\item 3. Listar tareas pendientes
+			\item 4. Listar tareas completadas
+			\item 5. Salir
+		\end{itemize}
+		\item Las tareas deben almacenarse en un archivo \texttt{tareas.txt} con el formato:
+		\texttt{[Estado];[Descripción]} donde Estado puede ser \texttt{P} (pendiente) o \texttt{C} (completada)
+		\item Al iniciar, cargar las tareas existentes del archivo
+		\item Al salir, guardar todas las tareas en el archivo
+	\end{enumerate}
+	
+	\textbf{Ejemplo del contenido de tareas.txt:}
+	\begin{verbatim}
+	P;Estudiar para el examen
+	C;Hacer la tarea de matemáticas
+	P;Llamar al doctor
+	\end{verbatim}
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use funciones para cada opción del menú
+		\item Al listar tareas, mostrarlas numeradas para facilitar su identificación
+		\item Para marcar como completada, solicitar el número de tarea
+		\item Incluya validación y manejo de excepciones
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Menú funcional y repetitivo (2 puntos)
+		\item Agregar tareas correctamente (2 puntos)
+		\item Marcar tareas como completadas (2 puntos)
+		\item Listar tareas separadas por estado (2 puntos)
+		\item Persistencia correcta en archivo (2 puntos)
+	\end{itemize}
+	
+	\end{questions}
+
+	\begin{center}
+		\gradetable[h][questions]
+	\end{center}
+	
+	% NOTAS PARA EL PROFESOR
+	% Total: 50 puntos
+	% MCQ: 6 preguntas × 3 puntos = 18 puntos
+	% Ejercicio 1: 10 puntos
+	% Ejercicio 2: 12 puntos
+	% Ejercicio 3: 10 puntos
+	% Tiempo estimado: 100 minutos
+	
+\end{document}

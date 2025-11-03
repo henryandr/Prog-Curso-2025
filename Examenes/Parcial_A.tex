@@ -1,0 +1,292 @@
+\documentclass[addpoints,11pt]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{array} 
+\usepackage{vhistory}
+\usepackage{verbatim}
+\usepackage{multicol,caption,capt-of}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray}
+}
+
+\newcommand{\examversion}{A}
+\newcommand{\examduration}{100 minutos}
+\newcommand{\exampoints}{50}
+\newcommand{\examdate}{Diciembre 2024}
+
+\begin{document}
+	
+	\pagestyle{headandfoot}
+	\runningheadrule
+	\firstpageheader{Programación}{Examen Parcial - Versión \examversion}{\examdate}
+	\runningheader{Programación}
+	{Examen Parcial - Versión \examversion, Página \thepage\ de \numpages}
+	{\examdate}
+	\runningfooter{Escuela de Ingenierías}{UPB}{Ingeniería Aeronáutica}
+	
+	\begin{center}
+    \begin{tabular}{@{}m{4cm}|m{8cm}|m{5cm}|@{}}
+        \cline{2-3}
+		\multirow{5}{*}{\includegraphics[width=1\linewidth]{LogoUPB.jpg}}
+        &\multicolumn{2}{c|}{\textbf{Universidad Pontificia Bolivariana - Sede Medellín}} \\ \cline{2-3}
+        &Curso: \textbf{Programación} &Duración: \examduration \\ \cline{2-3}
+        &Preparada por:\textbf{ Henry Andrade, IEo, Ph.D.} &Puntos totales: \exampoints \\ \cline{2-3}
+        &\multicolumn{2}{l|}{Facultad de Ingeniería Aeronáutica} \\ \cline{2-3}
+        &\multicolumn{2}{l|}{Estudiante: } \\ \cline{2-3}
+    \end{tabular}
+	\end{center}
+
+	\begin{center}
+	\fbox{\fbox{\parbox{7in}{Lea cuidadosamente cada una de las preguntas antes de contestar. No se permite el uso de ningún tipo de dispositivo electrónico diferente al computador asignado. No se puede utilizar el navegador para acceder a ninguna página que no sea autorizada por el docente. Cualquier intento de copia o fraude dará inicio a un proceso disciplinario. Este examen evalúa sus competencias en manejo de archivos de texto y CSV en Python.}}}
+	\end{center}
+
+	\vspace{0.5cm}
+	
+	\begin{questions} 
+	\boxedpoints
+	\pointname{ Puntos}
+	\qformat{Pregunta \thequestion \dotfill \thepoints}
+	
+	% ============================================
+	% SECCIÓN 1: PREGUNTAS DE SELECCIÓN MÚLTIPLE (18 puntos)
+	% ============================================
+	
+	\question[3]
+	¿Cuál es el modo correcto para abrir un archivo CSV para lectura en Python cuando se quiere evitar problemas con los caracteres de nueva línea?
+	
+	\begin{choices}
+		\choice \texttt{open('datos.csv', 'r')}
+		\choice \texttt{open('datos.csv', 'r', encoding='utf-8')}
+		\CorrectChoice \texttt{open('datos.csv', 'r', newline='')} % CORRECTA
+		\choice \texttt{open('datos.csv', 'rb')}
+	\end{choices}
+	
+	% Justificación: El parámetro newline='' es necesario para evitar problemas con diferentes representaciones de saltos de línea en archivos CSV
+	
+	\question[3]
+	Observe el siguiente código:
+	
+	\begin{lstlisting}
+fp = open("texto.txt", "r")
+data1 = fp.read(10)
+data2 = fp.read(10)
+fp.close()
+	\end{lstlisting}
+	
+	¿Qué afirmación es correcta sobre las variables \texttt{data1} y \texttt{data2}?
+	
+	\begin{choices}
+		\choice Ambas contienen los primeros 10 caracteres del archivo
+		\CorrectChoice \texttt{data1} contiene los primeros 10 caracteres y \texttt{data2} los siguientes 10 % CORRECTA
+		\choice Ambas contienen todo el contenido del archivo
+		\choice \texttt{data2} estará vacía porque el archivo ya fue leído
+	\end{choices}
+	
+	% Justificación: El puntero del archivo avanza con cada operación de lectura
+	
+	\question[3]
+	Al escribir datos en un archivo CSV usando \texttt{csv.writer}, ¿cuál parámetro se debe usar para que todos los valores queden rodeados por comillas?
+	
+	\begin{choices}
+		\choice \texttt{delimiter=','}
+		\choice \texttt{quoting=csv.QUOTE\_MINIMAL}
+		\CorrectChoice \texttt{quoting=csv.QUOTE\_ALL} % CORRECTA
+		\choice \texttt{escapechar='\textbackslash\textbackslash'}
+	\end{choices}
+	
+	% Justificación: QUOTE_ALL hace que todos los valores se rodeen con comillas
+	
+	\question[3]
+	¿Cuál es la principal ventaja de usar la sentencia \texttt{with} al trabajar con archivos?
+	
+	\begin{choices}
+		\choice Permite leer archivos más rápido
+		\CorrectChoice Cierra automáticamente el archivo al salir del bloque % CORRECTA
+		\choice Permite abrir múltiples archivos simultáneamente
+		\choice Convierte automáticamente los datos a listas
+	\end{choices}
+	
+	% Justificación: with asegura el cierre automático del archivo, evitando fugas de recursos
+	
+	\question[3]
+	En el módulo \texttt{csv} de Python, ¿qué método se usa para leer un archivo CSV cuando se desea obtener cada fila como un diccionario usando los encabezados como claves?
+	
+	\begin{choices}
+		\choice \texttt{csv.reader()}
+		\CorrectChoice \texttt{csv.DictReader()} % CORRECTA
+		\choice \texttt{csv.writer()}
+		\choice \texttt{csv.readlines()}
+	\end{choices}
+	
+	% Justificación: DictReader lee las filas como diccionarios con las columnas como claves
+	
+	\question[3]
+	¿Qué sucede si se intenta abrir un archivo en modo \texttt{'w'} cuando el archivo ya existe?
+	
+	\begin{choices}
+		\choice Se genera un error
+		\CorrectChoice El contenido anterior se elimina y se sobrescribe % CORRECTA
+		\choice Los nuevos datos se agregan al final del archivo
+		\choice El archivo se abre en modo solo lectura
+	\end{choices}
+	
+	% Justificación: El modo 'w' siempre sobrescribe el archivo existente
+	
+	% ============================================
+	% SECCIÓN 2: EJERCICIO PRÁCTICO 1 (10 puntos)
+	% ============================================
+	
+	\question[10]
+	Escriba un programa en Python que realice las siguientes tareas:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Lea un archivo de texto llamado \texttt{entrada.txt}
+		\item Cuente el número total de palabras en el archivo
+		\item Cuente cuántas veces aparece cada vocal (a, e, i, o, u) sin importar mayúsculas o minúsculas
+		\item Guarde los resultados en un archivo llamado \texttt{resultados.txt} con el siguiente formato:
+	\end{enumerate}
+	
+	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
+	Total de palabras: [número]\\
+	Vocal a: [cantidad]\\
+	Vocal e: [cantidad]\\
+	Vocal i: [cantidad]\\
+	Vocal o: [cantidad]\\
+	Vocal u: [cantidad]
+	\end{tcolorbox}
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use la sentencia \texttt{with} para manejar archivos
+		\item Implemente manejo de errores para el caso en que el archivo no exista
+		\item El código debe estar bien comentado
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Lectura correcta del archivo (2 puntos)
+		\item Conteo de palabras correcto (2 puntos)
+		\item Conteo de vocales correcto (3 puntos)
+		\item Escritura correcta del archivo de resultados (2 puntos)
+		\item Manejo de errores (1 punto)
+	\end{itemize}
+	
+	% ============================================
+	% SECCIÓN 3: EJERCICIO PRÁCTICO 2 (12 puntos)
+	% ============================================
+	
+	\question[12]
+	Se tiene un archivo CSV llamado \texttt{estudiantes.csv} con la siguiente estructura:
+	
+	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
+	Nombre,Nota1,Nota2,Nota3\\
+	Juan,4.5,3.8,4.2\\
+	María,5.0,4.8,4.9\\
+	Pedro,3.5,3.0,3.8
+	\end{tcolorbox}
+	
+	Escriba un programa que:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Lea el archivo CSV
+		\item Calcule el promedio de las tres notas para cada estudiante
+		\item Determine si el estudiante aprobó (promedio $\geq$ 3.5)
+		\item Cree un nuevo archivo CSV llamado \texttt{promedios.csv} con el formato:
+	\end{enumerate}
+	
+	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
+	Nombre,Promedio,Estado\\
+	Juan,4.17,Aprobado\\
+	María,4.90,Aprobado\\
+	Pedro,3.43,Reprobado
+	\end{tcolorbox}
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use el módulo \texttt{csv} de Python
+		\item Use \texttt{newline=''} al abrir los archivos CSV
+		\item Redondee los promedios a 2 decimales
+		\item Incluya manejo de errores
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Lectura correcta del CSV con encabezados (3 puntos)
+		\item Cálculo correcto de promedios (3 puntos)
+		\item Determinación correcta del estado (2 puntos)
+		\item Escritura correcta del nuevo CSV (3 puntos)
+		\item Manejo de errores y buenas prácticas (1 punto)
+	\end{itemize}
+	
+	% ============================================
+	% SECCIÓN 4: EJERCICIO PRÁCTICO 3 (10 puntos)
+	% ============================================
+	
+	\question[10]
+	Desarrolle un programa que implemente un sistema de registro de temperaturas. El programa debe:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Presentar un menú con las siguientes opciones:
+		\begin{itemize}
+			\item 1. Agregar temperatura
+			\item 2. Mostrar todas las temperaturas
+			\item 3. Calcular temperatura promedio
+			\item 4. Guardar datos en archivo
+			\item 5. Salir
+		\end{itemize}
+		\item Almacenar las temperaturas en una lista mientras el programa esté en ejecución
+		\item La opción 4 debe guardar todas las temperaturas en un archivo \texttt{temperaturas.txt}, una por línea
+		\item Al iniciar el programa, si existe el archivo \texttt{temperaturas.txt}, debe cargar los datos automáticamente
+	\end{enumerate}
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use funciones para cada opción del menú
+		\item Valide que las temperaturas ingresadas sean números válidos
+		\item Use manejo de excepciones
+		\item El menú debe ser repetitivo hasta que el usuario seleccione salir
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Menú funcional y repetitivo (2 puntos)
+		\item Funciones para agregar y mostrar datos (2 puntos)
+		\item Cálculo correcto del promedio (2 puntos)
+		\item Guardar datos en archivo (2 puntos)
+		\item Cargar datos al inicio (2 puntos)
+	\end{itemize}
+	
+	\end{questions}
+
+	\begin{center}
+		\gradetable[h][questions]
+	\end{center}
+	
+	% NOTAS PARA EL PROFESOR
+	% Total: 50 puntos
+	% MCQ: 6 preguntas × 3 puntos = 18 puntos
+	% Ejercicio 1: 10 puntos
+	% Ejercicio 2: 12 puntos
+	% Ejercicio 3: 10 puntos
+	% Tiempo estimado: 100 minutos (15 min MCQ, 25 min Ej1, 35 min Ej2, 25 min Ej3)
+	
+\end{document}
