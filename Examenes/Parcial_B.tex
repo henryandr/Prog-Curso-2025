@@ -1,0 +1,303 @@
+\documentclass[addpoints,11pt]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{array} 
+\usepackage{vhistory}
+\usepackage{verbatim}
+\usepackage{multicol,caption,capt-of}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray}
+}
+
+\newcommand{\examversion}{B}
+\newcommand{\examduration}{100 minutos}
+\newcommand{\exampoints}{50}
+\newcommand{\examdate}{Diciembre 2024}
+
+\begin{document}
+	
+	\pagestyle{headandfoot}
+	\runningheadrule
+	\firstpageheader{Programación}{Examen Parcial - Versión \examversion}{\examdate}
+	\runningheader{Programación}
+	{Examen Parcial - Versión \examversion, Página \thepage\ de \numpages}
+	{\examdate}
+	\runningfooter{Escuela de Ingenierías}{UPB}{Ingeniería Aeronáutica}
+	
+	\begin{center}
+    \begin{tabular}{@{}m{4cm}|m{8cm}|m{5cm}|@{}}
+        \cline{2-3}
+		\multirow{5}{*}{\includegraphics[width=1\linewidth]{LogoUPB.jpg}}
+        &\multicolumn{2}{c|}{\textbf{Universidad Pontificia Bolivariana - Sede Medellín}} \\ \cline{2-3}
+        &Curso: \textbf{Programación} &Duración: \examduration \\ \cline{2-3}
+        &Preparada por:\textbf{ Henry Andrade, IEo, Ph.D.} &Puntos totales: \exampoints \\ \cline{2-3}
+        &\multicolumn{2}{l|}{Facultad de Ingeniería Aeronáutica} \\ \cline{2-3}
+        &\multicolumn{2}{l|}{Estudiante: } \\ \cline{2-3}
+    \end{tabular}
+	\end{center}
+
+	\begin{center}
+	\fbox{\fbox{\parbox{7in}{Lea cuidadosamente cada una de las preguntas antes de contestar. No se permite el uso de ningún tipo de dispositivo electrónico diferente al computador asignado. No se puede utilizar el navegador para acceder a ninguna página que no sea autorizada por el docente. Cualquier intento de copia o fraude dará inicio a un proceso disciplinario. Este examen evalúa sus competencias en manejo de archivos de texto y CSV en Python.}}}
+	\end{center}
+
+	\vspace{0.5cm}
+	
+	\begin{questions} 
+	\boxedpoints
+	\pointname{ Puntos}
+	\qformat{Pregunta \thequestion \dotfill \thepoints}
+	
+	% ============================================
+	% SECCIÓN 1: PREGUNTAS DE SELECCIÓN MÚLTIPLE (18 puntos)
+	% ============================================
+	
+	\question[3]
+	¿Cuál modo de apertura debe usarse para agregar contenido al final de un archivo existente sin eliminar su contenido anterior?
+	
+	\begin{choices}
+		\choice \texttt{open('archivo.txt', 'w')}
+		\CorrectChoice \texttt{open('archivo.txt', 'a')} % CORRECTA
+		\choice \texttt{open('archivo.txt', 'r+')}
+		\choice \texttt{open('archivo.txt', 'x')}
+	\end{choices}
+	
+	% Justificación: El modo 'a' (append) agrega contenido al final sin borrar lo existente
+	
+	\question[3]
+	¿Qué retorna el método \texttt{readlines()} cuando se aplica a un archivo de texto?
+	
+	\begin{choices}
+		\choice Una cadena con todo el contenido del archivo
+		\CorrectChoice Una lista donde cada elemento es una línea del archivo % CORRECTA
+		\choice Un diccionario con las líneas numeradas
+		\choice Un iterador que genera líneas una por una
+	\end{choices}
+	
+	% Justificación: readlines() retorna una lista con todas las líneas del archivo
+	
+	\question[3]
+	Al usar \texttt{csv.writer} para escribir en un archivo CSV, ¿por qué es importante usar el parámetro \texttt{newline=''} al abrir el archivo?
+	
+	\begin{choices}
+		\choice Para mejorar la velocidad de escritura
+		\CorrectChoice Para evitar líneas en blanco adicionales entre filas % CORRECTA
+		\choice Para permitir el uso de delimitadores personalizados
+		\choice Para habilitar la escritura de caracteres especiales
+	\end{choices}
+	
+	% Justificación: newline='' previene la inserción de líneas en blanco en algunos sistemas operativos
+	
+	\question[3]
+	Observe el siguiente código:
+	
+	\begin{lstlisting}
+with open("datos.txt", "r") as f:
+    contenido = f.read()
+# ¿Qué pasa aquí con el archivo?
+	\end{lstlisting}
+	
+	Después de salir del bloque \texttt{with}, ¿qué sucede con el archivo?
+	
+	\begin{choices}
+		\choice Permanece abierto para futuras operaciones
+		\CorrectChoice Se cierra automáticamente % CORRECTA
+		\choice Se elimina del sistema de archivos
+		\choice Genera un error si no se cierra manualmente
+	\end{choices}
+	
+	% Justificación: El bloque with cierra automáticamente los recursos al salir
+	
+	\question[3]
+	¿Cuál es el delimitador predeterminado que usa \texttt{csv.reader()} si no se especifica otro?
+	
+	\begin{choices}
+		\CorrectChoice La coma (,) % CORRECTA
+		\choice El punto y coma (;)
+		\choice El tabulador (\textbackslash t)
+		\choice El espacio ( )
+	\end{choices}
+	
+	% Justificación: Por defecto, csv.reader usa la coma como delimitador
+	
+	\question[3]
+	¿Qué sucede si se intenta leer un archivo que no existe usando \texttt{open('archivo.txt', 'r')}?
+	
+	\begin{choices}
+		\choice Se crea un archivo vacío
+		\choice Retorna \texttt{None}
+		\CorrectChoice Se genera una excepción \texttt{FileNotFoundError} % CORRECTA
+		\choice El programa se cierra sin error
+	\end{choices}
+	
+	% Justificación: Python genera FileNotFoundError cuando se intenta leer un archivo inexistente
+	
+	% ============================================
+	% SECCIÓN 2: EJERCICIO PRÁCTICO 1 (10 puntos)
+	% ============================================
+	
+	\question[10]
+	Escriba un programa en Python que procese un archivo de texto llamado \texttt{notas.txt} que contiene números separados por espacios en cada línea. El programa debe:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Leer el archivo \texttt{notas.txt}
+		\item Calcular el promedio de todos los números en el archivo
+		\item Encontrar el valor máximo y mínimo
+		\item Contar cuántos números hay en total
+		\item Crear un archivo \texttt{estadisticas.txt} con los resultados en el siguiente formato:
+	\end{enumerate}
+	
+	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
+	Cantidad de números: [número]\\
+	Promedio: [valor]\\
+	Máximo: [valor]\\
+	Mínimo: [valor]
+	\end{tcolorbox}
+	
+	\textbf{Ejemplo:} Si \texttt{notas.txt} contiene:
+	\begin{verbatim}
+	4.5 3.8 4.2
+	5.0 4.8
+	\end{verbatim}
+	
+	El resultado sería: Promedio: 4.46, Máximo: 5.0, Mínimo: 3.8, Cantidad: 5
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use la sentencia \texttt{with} para manejar archivos
+		\item Convierta las cadenas a números flotantes
+		\item Incluya manejo de excepciones
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Lectura y procesamiento del archivo (2 puntos)
+		\item Cálculo del promedio (2 puntos)
+		\item Identificación de máximo y mínimo (2 puntos)
+		\item Conteo de números (1 punto)
+		\item Escritura correcta del archivo de resultados (2 puntos)
+		\item Manejo de errores (1 punto)
+	\end{itemize}
+	
+	% ============================================
+	% SECCIÓN 3: EJERCICIO PRÁCTICO 2 (12 puntos)
+	% ============================================
+	
+	\question[12]
+	Se tiene un archivo CSV llamado \texttt{productos.csv} con la siguiente estructura:
+	
+	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
+	Producto,Precio,Cantidad\\
+	Laptop,1200000,15\\
+	Mouse,25000,50\\
+	Teclado,80000,30
+	\end{tcolorbox}
+	
+	Escriba un programa que:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Lea el archivo CSV
+		\item Calcule el valor total del inventario para cada producto (Precio × Cantidad)
+		\item Identifique el producto con mayor valor en inventario
+		\item Cree un nuevo archivo CSV llamado \texttt{inventario.csv} con el formato:
+	\end{enumerate}
+	
+	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
+	Producto,Precio,Cantidad,ValorTotal\\
+	Laptop,1200000,15,18000000\\
+	Mouse,25000,50,1250000\\
+	Teclado,80000,30,2400000
+	\end{tcolorbox}
+	
+	Además, el programa debe imprimir en consola: ``El producto con mayor valor en inventario es: [Producto] con \$[Valor]''
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use el módulo \texttt{csv} de Python
+		\item Use \texttt{csv.DictReader} para leer y \texttt{csv.DictWriter} para escribir
+		\item Use \texttt{newline=''} al abrir los archivos
+		\item Maneje correctamente los tipos de datos (convertir strings a números)
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Lectura correcta del CSV con DictReader (3 puntos)
+		\item Cálculo correcto del valor total (3 puntos)
+		\item Identificación del producto con mayor valor (2 puntos)
+		\item Escritura correcta del nuevo CSV con DictWriter (3 puntos)
+		\item Manejo de tipos y buenas prácticas (1 punto)
+	\end{itemize}
+	
+	% ============================================
+	% SECCIÓN 4: EJERCICIO PRÁCTICO 3 (10 puntos)
+	% ============================================
+	
+	\question[10]
+	Desarrolle un programa de gestión de contactos que permita almacenar nombres y números telefónicos. El programa debe:
+	
+	\begin{enumerate}[label=\alph*)]
+		\item Presentar un menú con las siguientes opciones:
+		\begin{itemize}
+			\item 1. Agregar contacto
+			\item 2. Buscar contacto por nombre
+			\item 3. Listar todos los contactos
+			\item 4. Eliminar contacto
+			\item 5. Salir
+		\end{itemize}
+		\item Los contactos deben almacenarse en un archivo \texttt{contactos.txt} con el formato:
+		\texttt{Nombre;Teléfono}
+		\item Al iniciar, el programa debe cargar los contactos existentes del archivo
+		\item Los cambios deben guardarse automáticamente en el archivo
+	\end{enumerate}
+	
+	\textbf{Requisitos:}
+	\begin{itemize}
+		\item Use funciones para cada opción del menú
+		\item Implemente validación de datos (no permitir nombres o teléfonos vacíos)
+		\item Use manejo de excepciones
+		\item Al buscar, mostrar mensaje si no se encuentra el contacto
+		\item Al eliminar, confirmar si el contacto fue eliminado exitosamente
+	\end{itemize}
+	
+	\textbf{Rúbrica:}
+	\begin{itemize}
+		\item Menú funcional y repetitivo (2 puntos)
+		\item Funciones para agregar y listar contactos (2 puntos)
+		\item Búsqueda de contactos (2 puntos)
+		\item Eliminación de contactos (2 puntos)
+		\item Persistencia de datos en archivo (2 puntos)
+	\end{itemize}
+	
+	\end{questions}
+
+	\begin{center}
+		\gradetable[h][questions]
+	\end{center}
+	
+	% NOTAS PARA EL PROFESOR
+	% Total: 50 puntos
+	% MCQ: 6 preguntas × 3 puntos = 18 puntos
+	% Ejercicio 1: 10 puntos
+	% Ejercicio 2: 12 puntos
+	% Ejercicio 3: 10 puntos
+	% Tiempo estimado: 100 minutos
+	
+\end{document}
