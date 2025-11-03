@@ -1,0 +1,169 @@
+\documentclass[addpoints,11pt]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{array} 
+\usepackage{vhistory}
+\usepackage{verbatim}
+\usepackage{multicol,caption,capt-of}
+%multi-row
+\usepackage{multirow}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
+
+\begin{document}
+	
+	%Encabezados y pie de página
+	%----------------------------------------------------------------------------------------
+	\pagestyle{headandfoot}
+	\runningheadrule
+	\firstpageheader{Programación}{Examen Final}{Noviembre 10, 2023}
+	\runningheader{Programación}
+	{Examen Final, Page \thepage\ of \numpages}
+	{Noviembre 10, 2023}
+%	\firstpagefooter{Escuela de Ingenierías}{UPB}{Fac. Ing. Eléctrica y Electrónica}
+	\runningfooter{Escuela de Ingenierías}{UPB}{Ingeniería Aeronáutica}
+	
+	\begin{center}
+    \begin{tabular}{@{}m{4cm}|m{8cm}|m{5cm}|@{}}
+        \cline{2-3}
+				\multirow{5}{*}{\includegraphics[width=1\linewidth]{LogoUPB.jpg}}
+        &\multicolumn{2}{c|}{\textbf{Universidad Pontificia Bolivariana - Sede  Medellín}}		\\ \cline{2-3}
+        &Curso: \textbf{Programación}		&Duración: 100 minutos				\\ \cline{2-3}
+        &Preparada por:\textbf{ Henry Andrade, IEo, Ph.D.}	&Prueba: Convencional				\\ \cline{2-3}
+        &\multicolumn{2}{l|}{Facultad de Ingeniería Aeronáutica}					\\ \cline{2-3}
+        &\multicolumn{2}{l|}{Estudiante:				}										\\ \cline{2-3} %\hline
+    \end{tabular}
+\end{center}
+
+
+	%----------------------------------------------------------------------------------------
+	%Cuadro con instrucciones
+	%----------------------------------------------------------------------------------------		
+	\begin{center}
+	\fbox{\fbox{\parbox{7in}{Lea cuidadosamente cada una de las preguntas antes de contestar. No se permite el uso de ningún tipo de dispositivo electrónico difernte al computador asignado. No se puede utilizar el navegador para acceder a ninguna página que no sea autorizada por el docente. Cualquier intento de copia o fraude dará inicio a un proceso disciplinario.}}}
+	\end{center}
+
+	%----------------------------------------------------------------------------------------
+	%\begin{multicols}{2}
+
+	%Sección de preguntas	
+	%----------------------------------------------------------------------------------------	
+	\begin{center}
+		\LARGE{Enunciado}
+	\end{center}
+	
+	Resuelva el siguiente ejercicio utilizando el lenguaje de programación \textbf{Python}. 
+El aeropuerto de la ciudad necesita realizar un programa para analizar los datos de los vuelos del día. Para ello, diariamente recibe un archivo llamado \textit{vuelos.txt}, que contiene los siguientes datos:\\ 
+
+	\begin{center}
+		\begin{tcolorbox}[width=14cm, colback=gray!20, boxrule=0pt]
+		Fecha\\
+		Nombre aerolínea; No. vuelo; Hora salida; Minuto salida; Destino; Estado$\backslash n$\\
+		\end{tcolorbox}
+	\end{center}
+	
+	
+	Tenga que cuenta que: 
+	\begin{itemize}
+		\item Cada línea del archivo corresponde a un vuelo.
+		\item El Aeropuerto gestiona 3 aerolíneas diferentes: Avianca, VIVA y Latam. 
+		\item Las ciudades de destino son 3: Bogotá, Montería y Bucaramanga.
+		\item Los  estados que pueden aparecer en el archivo se representan con un número entre 1 y 3, así: 1: a tiempo, 2: con retraso  y 3: cancelado. 
+	\end{itemize}
+	
+	Un ejemplo del archivo se muestra en la siguiente figura:
+	
+	\begin{center}
+		\begin{tcolorbox}[width=8cm, colback=gray!20, boxrule=0pt]
+		10-11-2023\\
+		Avianca;AV8877;8;02;Bogotá;1\\
+		VIVA;VH9966;14;10;Montería;3\\
+		Latam;LT5541;21;56;Bucaramanga;2\\
+		\end{tcolorbox}
+	\end{center}
+	
+
+	\begin{center}
+		\LARGE{Requerimientos}
+	\end{center}
+
+
+	\begin{questions} 
+	\boxedpoints
+	\pointname{ Puntos}
+	\qformat{Pregunta \thequestion \dotfill \thepoints}
+	
+	\question[5] 
+	Debe presentar un menú repetitivo (bucle principal) con las siguientes opciones:
+
+	\begin{enumerate}
+			\item[a.] Mostrar información en pantalla
+			\item[b.] Generar estadísticas
+			\item[c.] Guardar estadísticas
+			\item[d.] Salir
+	\end{enumerate}
+
+
+	\question[15]
+	
+	La opción “Mostrar información en pantalla” debe llamar a una función, la cual se encarga de leer el archivo “vuelos.txt” y de forma organizada debe mostrar en la pantalla los datos contenidos en dicho archivo. Para el caso del archivo del ejemplo, se debe imprimir en pantalla de la siguiente manera:
+	
+	\begin{tabular}{lllll}
+	Fecha: & 9/11/2021 \\
+	Aerolínea & Vuelo & Hora & Destino & Estado \\
+	Avianca & AV8877 & 8:02 & Bogotá & A tiempo \\
+	VIVA & VH9966 & 14:10 & Mon.ría & Cancelado \\
+	Latam & LT5541 & 21:56 & Buc...ga & Demorado \\
+	\end{tabular}
+
+	\question[15]
+	La opción “Generar estadísticas” debe llamar a una función, la cual se encarga de utilizar los datos leídos del archivo “vuelos.txt” para generar los siguientes datos:
+	
+	\begin{enumerate}
+    \item[a.] Cantidad de vuelos por Aerolínea
+    \item[b.] Cantidad de vuelos por ciudad de destino
+    \item[c.] Cantidad de vuelos por estado
+	\end{enumerate}
+	
+	Los datos calculados, se deben mostrar en pantalla de forma organizada.
+	
+	
+	\question[15]
+	La opción “Guardar estadísticas” crea un nuevo archivo denominado \textbf{\textit{Resultados.txt}}, donde se almacenarán los datos generados en la opción 3 del programa. Tenga en cuenta que, si no se han generado estadísticas, no se puede crear el archivo. De modo que usted debe utilizar una variable que le permita conocer si ya se generaron las estadísticas o no. Solo en caso afirmativo, se debe crear el archivo, en caso contrario, se debe presentar un mensaje informando que “Las estadísticas no han sido generadas”.
+El siguiente es un ejemplo de cómo debería quedar un archivo de Resultados a partir de un archivo que contiene datos de 20 vuelos.
+
+	\begin{center}
+		\begin{tcolorbox}[width=5cm, colback=gray!20, boxrule=0pt]
+		Fecha: 9/11/2021\\
+		Avianca;6\\
+		VIVA;5\\
+		Latam;9\\
+		Bogotá;12\\
+		Montería;5\\
+		Bucaramanga;3\\
+		Estado1;11\\
+		Estado2;5\\
+		Estado3;4\\
+		\end{tcolorbox}
+	\end{center}
+
+	\end{questions}
+
+	%----------------------------------------------------------------------------------------
+	%Tabla con puntajes para evaluación	
+	%----------------------------------------------------------------------------------------
+	\begin{center}
+		\gradetable[h][questions]
+	\end{center}
+	%----------------------------------------------------------------------------------------	
+	\newpage
+	% Start of the revision history table
+	%\begin{versionhistory}
+		%\vhEntry{1.0}{15.02.17}{HAC}{created}
+		%\vhEntry{1.1}{23.01.04}{DP|JPW}{correction}
+		%\vhEntry{1.2}{03.02.04}{DP|JPW}{revised after review}
+	%\end{versionhistory}
+	%\end{multicols}
+\end{document}
