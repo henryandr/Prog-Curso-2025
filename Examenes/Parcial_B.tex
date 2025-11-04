@@ -5,13 +5,13 @@
 \usepackage{stfloats}
 \usepackage{multirow}
 \usepackage{array} 
-\usepackage{vhistory}
+%\usepackage{vhistory}
 \usepackage{verbatim}
 \usepackage{multicol,caption,capt-of}
 \usepackage{enumitem}
 \usepackage{microtype}
 \usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
-\usepackage{fancyhdr}
+%\usepackage{fancyhdr}
 \usepackage{listings}
 \usepackage{xcolor}
 
@@ -31,7 +31,7 @@
 \newcommand{\examversion}{B}
 \newcommand{\examduration}{100 minutos}
 \newcommand{\exampoints}{50}
-\newcommand{\examdate}{Diciembre 2024}
+\newcommand{\examdate}{Noviembre 4 de 2025}
 
 \begin{document}
 	
@@ -46,7 +46,7 @@
 	\begin{center}
     \begin{tabular}{@{}m{4cm}|m{8cm}|m{5cm}|@{}}
         \cline{2-3}
-		\multirow{5}{*}{\includegraphics[width=1\linewidth]{LogoUPB.jpg}}
+		\multirow{5}{*}{\includegraphics[width=1\linewidth]{Logo-UPB-2022.png}}
         &\multicolumn{2}{c|}{\textbf{Universidad Pontificia Bolivariana - Sede Medellín}} \\ \cline{2-3}
         &Curso: \textbf{Programación} &Duración: \examduration \\ \cline{2-3}
         &Preparada por:\textbf{ Henry Andrade, IEo, Ph.D.} &Puntos totales: \exampoints \\ \cline{2-3}
@@ -56,11 +56,13 @@
 	\end{center}
 
 	\begin{center}
-	\fbox{\fbox{\parbox{7in}{Lea cuidadosamente cada una de las preguntas antes de contestar. No se permite el uso de ningún tipo de dispositivo electrónico diferente al computador asignado. No se puede utilizar el navegador para acceder a ninguna página que no sea autorizada por el docente. Cualquier intento de copia o fraude dará inicio a un proceso disciplinario. Este examen evalúa sus competencias en manejo de archivos de texto y CSV en Python.}}}
+	\fbox{\fbox{\parbox{7in}{Lea cuidadosamente cada una de las preguntas antes de contestar. No se permite el uso de ningún tipo de dispositivo electrónico. Cualquier intento de copia o fraude dará inicio a un proceso disciplinario. Este examen evalúa sus competencias en manejo de archivos de texto y CSV en Python.}}}
 	\end{center}
-
-	\vspace{0.5cm}
 	
+	%----------------------------------------------------------------------------------------
+	\begin{multicols}{2}
+	%----------------------------------------------------------------------------------------
+
 	\begin{questions} 
 	\boxedpoints
 	\pointname{ Puntos}
@@ -112,7 +114,7 @@
 	\begin{lstlisting}
 with open("datos.txt", "r") as f:
     contenido = f.read()
-# ¿Qué pasa aquí con el archivo?
+
 	\end{lstlisting}
 	
 	Después de salir del bloque \texttt{with}, ¿qué sucede con el archivo?
@@ -126,38 +128,14 @@ with open("datos.txt", "r") as f:
 	
 	% Justificación: El bloque with cierra automáticamente los recursos al salir
 	
-	\question[3]
-	¿Cuál es el delimitador predeterminado que usa \texttt{csv.reader()} si no se especifica otro?
-	
-	\begin{choices}
-		\CorrectChoice La coma (,) % CORRECTA
-		\choice El punto y coma (;)
-		\choice El tabulador (\textbackslash t)
-		\choice El espacio ( )
-	\end{choices}
-	
-	% Justificación: Por defecto, csv.reader usa la coma como delimitador
-	
-	\question[3]
-	¿Qué sucede si se intenta leer un archivo que no existe usando \texttt{open('archivo.txt', 'r')}?
-	
-	\begin{choices}
-		\choice Se crea un archivo vacío
-		\choice Retorna \texttt{None}
-		\CorrectChoice Se genera una excepción \texttt{FileNotFoundError} % CORRECTA
-		\choice El programa se cierra sin error
-	\end{choices}
-	
-	% Justificación: Python genera FileNotFoundError cuando se intenta leer un archivo inexistente
-	
 	% ============================================
 	% SECCIÓN 2: EJERCICIO PRÁCTICO 1 (10 puntos)
 	% ============================================
 	
-	\question[10]
+	\question[19]
 	Escriba un programa en Python que procese un archivo de texto llamado \texttt{notas.txt} que contiene números separados por espacios en cada línea. El programa debe:
 	
-	\begin{enumerate}[label=\alph*)]
+	\begin{enumerate}
 		\item Leer el archivo \texttt{notas.txt}
 		\item Calcular el promedio de todos los números en el archivo
 		\item Encontrar el valor máximo y mínimo
@@ -189,19 +167,19 @@ with open("datos.txt", "r") as f:
 	
 	\textbf{Rúbrica:}
 	\begin{itemize}
-		\item Lectura y procesamiento del archivo (2 puntos)
-		\item Cálculo del promedio (2 puntos)
-		\item Identificación de máximo y mínimo (2 puntos)
-		\item Conteo de números (1 punto)
-		\item Escritura correcta del archivo de resultados (2 puntos)
-		\item Manejo de errores (1 punto)
+		\item Lectura y procesamiento del archivo (4 puntos)
+		\item Cálculo del promedio (3 puntos)
+		\item Identificación de máximo y mínimo (3 puntos)
+		\item Conteo de números (3 punto)
+		\item Escritura correcta del archivo de resultados (4 puntos)
+		\item Manejo de errores (2 punto)
 	\end{itemize}
 	
 	% ============================================
 	% SECCIÓN 3: EJERCICIO PRÁCTICO 2 (12 puntos)
 	% ============================================
 	
-	\question[12]
+	\question[19]
 	Se tiene un archivo CSV llamado \texttt{productos.csv} con la siguiente estructura:
 	
 	\begin{tcolorbox}[colback=gray!20, boxrule=0pt]
@@ -213,7 +191,7 @@ with open("datos.txt", "r") as f:
 	
 	Escriba un programa que:
 	
-	\begin{enumerate}[label=\alph*)]
+	\begin{enumerate}
 		\item Lea el archivo CSV
 		\item Calcule el valor total del inventario para cada producto (Precio × Cantidad)
 		\item Identifique el producto con mayor valor en inventario
@@ -239,54 +217,18 @@ with open("datos.txt", "r") as f:
 	
 	\textbf{Rúbrica:}
 	\begin{itemize}
-		\item Lectura correcta del CSV con DictReader (3 puntos)
-		\item Cálculo correcto del valor total (3 puntos)
-		\item Identificación del producto con mayor valor (2 puntos)
-		\item Escritura correcta del nuevo CSV con DictWriter (3 puntos)
-		\item Manejo de tipos y buenas prácticas (1 punto)
+		\item Lectura correcta del CSV con DictReader (4 puntos)
+		\item Cálculo correcto del valor total (5 puntos)
+		\item Identificación del producto con mayor valor (3 puntos)
+		\item Escritura correcta del nuevo CSV con DictWriter (5 puntos)
+		\item Manejo de tipos y buenas prácticas (2 punto)
 	\end{itemize}
 	
-	% ============================================
-	% SECCIÓN 4: EJERCICIO PRÁCTICO 3 (10 puntos)
-	% ============================================
-	
-	\question[10]
-	Desarrolle un programa de gestión de contactos que permita almacenar nombres y números telefónicos. El programa debe:
-	
-	\begin{enumerate}[label=\alph*)]
-		\item Presentar un menú con las siguientes opciones:
-		\begin{itemize}
-			\item 1. Agregar contacto
-			\item 2. Buscar contacto por nombre
-			\item 3. Listar todos los contactos
-			\item 4. Eliminar contacto
-			\item 5. Salir
-		\end{itemize}
-		\item Los contactos deben almacenarse en un archivo \texttt{contactos.txt} con el formato:
-		\texttt{Nombre;Teléfono}
-		\item Al iniciar, el programa debe cargar los contactos existentes del archivo
-		\item Los cambios deben guardarse automáticamente en el archivo
-	\end{enumerate}
-	
-	\textbf{Requisitos:}
-	\begin{itemize}
-		\item Use funciones para cada opción del menú
-		\item Implemente validación de datos (no permitir nombres o teléfonos vacíos)
-		\item Use manejo de excepciones
-		\item Al buscar, mostrar mensaje si no se encuentra el contacto
-		\item Al eliminar, confirmar si el contacto fue eliminado exitosamente
-	\end{itemize}
-	
-	\textbf{Rúbrica:}
-	\begin{itemize}
-		\item Menú funcional y repetitivo (2 puntos)
-		\item Funciones para agregar y listar contactos (2 puntos)
-		\item Búsqueda de contactos (2 puntos)
-		\item Eliminación de contactos (2 puntos)
-		\item Persistencia de datos en archivo (2 puntos)
-	\end{itemize}
+
 	
 	\end{questions}
+	
+	\end{multicols}
 
 	\begin{center}
 		\gradetable[h][questions]
